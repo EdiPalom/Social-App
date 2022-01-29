@@ -1,0 +1,23 @@
+<?php
+
+namespace Database\Factories;
+
+use Illuminate\Database\Eloquent\Factories\Factory;
+
+class PostFactory extends Factory
+{
+    /**
+     * Define the model's default state.
+     *
+     * @return array
+     */
+    public function definition()
+    {
+        return [
+            'id_user'=>rand(1,10),
+            'title'=>$this->faker->sentence,
+            'body'=>$this->faker->text(100),
+            'status'=>rand(0,1),
+        ];
+    }
+}
