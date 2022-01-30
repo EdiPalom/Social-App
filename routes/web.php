@@ -13,6 +13,13 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+use App\Http\Controllers\Backend\PostController as Post;
+
 Route::get('/', function () {
     return view('welcome');
 });
+
+Route::resource('posts',Post::class)
+    ->middleware('auth')
+    ->only(['store','update','destroy']);
+

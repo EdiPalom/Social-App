@@ -14,7 +14,7 @@ class MediaTypeFactory extends Factory
     public function definition()
     {
         return [
-            'name'=>$this->faker->string,
+            'name'=>$this->faker->sentence,
         ];
     }
 }

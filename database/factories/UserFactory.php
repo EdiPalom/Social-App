@@ -19,7 +19,7 @@ class UserFactory extends Factory
             'name' => $this->faker->name(),
             'lastname'=>$this->faker->lastName(),
             'phone_number'=> $this->faker->unique()->phoneNumber(),
-            'birth_date'=>$this->get_rand_birth_date(date("Y-m-d")),⎈
+            'birth_date'=>$this->get_rand_birth_date(date("Y-m-d")),
             'status'=>rand(0,1),
             'connected'=>rand(0,1),
             'profile'=>$this->get_random_avatar(),
