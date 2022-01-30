@@ -19,9 +19,11 @@ class CreateCommentsTable extends Migration
             $table->boolean('status')->default(1);
             $table->bigInteger('id_user')->unsigned();
             $table->bigInteger('id_multimedia')->unsigned();
+            $table->bigInteger('id_post')->unsigned();
             $table->timestamps();
             $table->foreign('id_user')->references('id')->on('users');
             $table->foreign('id_multimedia')->references('id')->on('multimedia');
+            $table->foreign('id_post')->references('id')->on('posts');
         });
     }
 

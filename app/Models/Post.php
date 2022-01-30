@@ -18,8 +18,8 @@ class Post extends Model
 
     public function setTitleAttribute($value)
     {
-        $title = strip_tags($value);
-        $this->attributes['title'] = strtolower(trim($title));
+        $title  = (!is_null($value)) ? sanitize_string($value) : null;
+        $this->attributes['title'] = strtolower($title);
     }
 
     public function getGetTitleAttribute()
@@ -29,13 +29,13 @@ class Post extends Model
 
     public function setBodyAttribute($value)
     {
-        $body = strip_tags($value);
-        $this->attributes['body'] = trim($body);
+        $body = (!is_null($value)) ? sanitize_string($value) : null;
+        $this->attributes['body'] = $body;
     }
 
     public function setIframeAttribute($value)
     {
-        $iframe = strip_tags($value);
-        $this->attributes['iframe'] = trim($iframe);
+        $iframe = (!is_null($value)) ? sanitize_iframe($value) : null;
+        $this->attributes['iframe'] = $iframe;
     }
 }

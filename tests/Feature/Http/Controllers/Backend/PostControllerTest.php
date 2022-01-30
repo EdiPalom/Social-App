@@ -19,23 +19,26 @@ class PostControllerTest extends TestCase
 
     // public function test_void_posts()
     // {
-    //     $response = $this->get('posts');
+    //     $user = User::factory()->create();
+    //     $response = $this->actingAs($user,'web')->get('posts');
 
-    //     $response->assertStatus(200)
-    //              ->assertSee('Empty Posts');
+    //     $response->assertStatus(200);
+    //              // ->assertSee('Empty Posts');
     // }
 
     // public function test_post_index()
     // {
     //     User::factory(10)->create();
 
+    //     $user = User::factory()->create();
+
     //     $post = Post::factory()->create();
 
-    //     $response = $this->get('posts');
+    //     $response = $this->actingAs($user,'web')->get('posts');
 
-    //     $response->assertStatus(200)
-    //              ->assertSee($post->name)
-    //              ->assertDontSee('Empty Posts');
+    //     $response->assertStatus(200);
+    //              // ->assertSee($post->title)
+    //              // ->assertDontSee('Empty Posts');
     // }
 
 

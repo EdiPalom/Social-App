@@ -29,6 +29,13 @@ class PostTest extends TestCase
         $this->assertEquals('proyecto en php',$post->title);
     }
 
+    public function test_set_post_title_trimmed_and_stripped()
+    {
+        $post = new Post;
+        $post->title = ' <p>Proyecto en php</p> ';
+        $this->assertEquals('proyecto en php',$post->title);
+    }
+
     public function test_get_post_title()
     {
         $post = new Post;
@@ -42,4 +49,48 @@ class PostTest extends TestCase
         $post->title="php";
         $this->assertNull($post->body);
     }
+
+    public function test_set_post_body()
+    {
+        $post = new Post;
+        $post->body="new content";
+        $this->assertEquals($post->body,"new content");
+    }
+
+    public function test_set_post_body_stripped()
+    {
+        $post = new Post;
+        $post->body="<p>new content</p>";
+        $this->assertEquals($post->body,"new content");
+    }
+
+    function test_set_post_body_trimmed()
+    {
+        $post = new Post;
+        $post->body=" new content ";
+        $this->assertEquals($post->body,"new content");
+    }
+
+    function test_set_post_body_stripped_and_trimmed()
+    {
+        $post = new Post;
+        $post->body=" <p>new content</p> ";
+        $this->assertEquals($post->body,"new content");
+    }
+
+    public function test_set_post_iframe()
+    {
+        $post = new Post;
+        $post->iframe='<iframe width="560" height="315" src="https://www.youtube.com/embed/zOjov-2OZ0E" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>';
+
+        $this->assertEquals($post->iframe,'<iframe width="560" height="315" src="https://www.youtube.com/embed/zOjov-2OZ0E" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>');
+    }
+
+    public function test_set_post_iframe_trimmed()
+    {
+        $post = new Post;
+        $post->iframe='  <iframe width="560" height="315" src="https://www.youtube.com/embed/zOjov-2OZ0E" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>  ';
+
+        $this->assertEquals($post->iframe,'<iframe width="560" height="315" src="https://www.youtube.com/embed/zOjov-2OZ0E" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>');
+    }   
 }

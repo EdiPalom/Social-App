@@ -6,8 +6,17 @@ use App\Http\Controllers\Controller;
 use App\Models\Comment;
 use Illuminate\Http\Request;
 
+use App\Http\Requests\CommentRequest;
+
 class CommentController extends Controller
 {
+
+    protected $comment;
+
+    public function __construct(Comment $comment)
+    {
+        $this->comment = $comment;
+    }
     /**
      * Display a listing of the resource.
      *
@@ -34,9 +43,16 @@ class CommentController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(CommentRequest $request)
     {
-        //
+        $comment = $this->comment->create([
+            'id_user'=>auth()->user()->id,
+            'id_multimedia'=>rand(1,90), // TODO: get by cookie
+            'content'=>$request->content,
+            'id_post'=>rand(1,90) // TODO: get by cookie
+        ]);
+        
+        return response()->json($comment,201);
     }
 
     /**
@@ -68,9 +84,10 @@ class CommentController extends Controller
      * @param  \App\Models\Comment  $comment
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Comment $comment)
+    public function update(CommentRequest $request, Comment $comment)
     {
-        //
+        $comment->update($request->all());
+        return response()->json($comment,200);
     }
 
     /**
@@ -81,6 +98,7 @@ class CommentController extends Controller
      */
     public function destroy(Comment $comment)
     {
-        //
+        // TODO: don't delete just change the status
+        $comment->delete();
     }
 }
