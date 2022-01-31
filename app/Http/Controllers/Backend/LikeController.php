@@ -6,6 +6,8 @@ use App\Http\Controllers\Controller;
 use App\Models\Like;
 use Illuminate\Http\Request;
 
+use App\Http\Requests\LikeRequest;
+
 class LikeController extends Controller
 {
     /**
@@ -13,6 +15,12 @@ class LikeController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+
+    protected $like;
+    public function __construct(Like $like){
+        $this->like = $like;
+    }
+    
     public function index()
     {
         //
@@ -34,9 +42,14 @@ class LikeController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(LikeRequest $request)
     {
-        //
+        $this->like->create([
+            'id_user'=>auth()->user()->id,
+            'id_multimedia'=>$request->id_multimedia
+        ]);
+
+        return response()->json(null,201);
     }
 
     /**
@@ -58,7 +71,7 @@ class LikeController extends Controller
      */
     public function edit(Like $like)
     {
-        //
+       
     }
 
     /**
@@ -70,7 +83,6 @@ class LikeController extends Controller
      */
     public function update(Request $request, Like $like)
     {
-        //
     }
 
     /**
@@ -81,6 +93,6 @@ class LikeController extends Controller
      */
     public function destroy(Like $like)
     {
-        //
+        $like->delete();
     }
 }

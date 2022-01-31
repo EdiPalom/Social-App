@@ -17,6 +17,7 @@ use App\Http\Controllers\Backend\PostController as Post;
 use App\Http\Controllers\Frontend\HomePageController as Home;
 use App\Http\Controllers\Backend\CommentController as Comment;
 use App\Http\Controllers\Backend\ImageController as Image;
+use App\Http\Controllers\Backend\LikeController as Like;
     
 
 Route::get('/', [Home::class,'index'])
@@ -33,4 +34,9 @@ Route::resource('comments',Comment::class)
 
     // ->only(['show','store','update','destroy']);
 Route::post('multimedia/image',[Image::class,'store'])
-    ->middleware('auth');
+    ->middleware('auth')
+    ->name('multimedia.image');
+
+Route::resource('likes',Like::class)
+    ->middleware('auth')
+    ->except(['index','show','edit','create','update']);
