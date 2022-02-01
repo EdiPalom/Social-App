@@ -10,7 +10,22 @@ class Like extends Model
     use HasFactory;
 
     protected $fillable = [
-        'id_user',
-        'id_multimedia'
+        'user_id',
+        'multimedia_id'
     ];
+
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
+    
+    public function post()
+    {
+        return $this->belongsTo(Post::class);
+    }
+
+    public function multimedia()
+    {
+        return $this->belongsTo(Multimedia::class);
+    }
 }

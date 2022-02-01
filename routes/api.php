@@ -20,6 +20,7 @@ use Illuminate\Support\Facades\Route;
 
 use App\Http\Controllers\Api\V1\PostController as Post;
 use App\Http\Controllers\Api\V1\CommentController as Comment;
+use App\Http\Controllers\Api\V1\LikeController as Like;
 
 Route::apiResource('posts',Post::class)
     ->middleware('auth:sanctum')
@@ -36,3 +37,7 @@ Route::get('comments/post/{post}',[Comment::class,'index_post'])
 Route::get('comments/media/{comment}',[Comment::class,'index_media'])
     ->middleware('auth:sanctum')
     ->name('comments.media');
+
+Route::get('likes/post/{post}',[Like::class,'post_likes'])
+    ->middleware('auth:sanctum')
+    ->name('likes.post');

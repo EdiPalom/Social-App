@@ -14,8 +14,8 @@ class LikeFactory extends Factory
     public function definition()
     {
         return [
-            'id_user'=>rand(1,10),
-            'id_multimedia'=>rand(1,90)
+            'user_id'=>rand(1,10),
+            'multimedia_id'=>rand(1,90)
         ];
     }
 }

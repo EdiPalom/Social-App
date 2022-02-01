@@ -10,6 +10,8 @@ use Illuminate\Http\Request;
 use App\Http\Resources\V1\PostResource;
 use App\Http\Resources\V1\PostCollection;
 
+use App\Helpers\Likes;
+
 class PostController extends Controller
 {
     protected $post;
@@ -57,8 +59,8 @@ class PostController extends Controller
         // return response()->json($post,200);
         // return new PostResource($post);
         
-        $data = new PostResource($post);
-        return response()->json($data);
+        $resource = new PostResource($post);
+        return response()->json($resource);
     }
 
     /**

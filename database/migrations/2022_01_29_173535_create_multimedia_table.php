@@ -15,15 +15,19 @@ class CreateMultimediaTable extends Migration
     {
         Schema::create('multimedia', function (Blueprint $table) {
             $table->id();
-            $table->bigInteger('id_post')->unsigned();
-            $table->bigInteger('id_user')->unsigned();
-            $table->bigInteger('id_type')->unsigned();
+            // $table->bigInteger('id_post')->unsigned();
+            // $table->bigInteger('id_user')->unsigned();
+            // $table->bigInteger('id_type')->unsigned();
             $table->boolean('status')->default(1);
             $table->timestamps();
 
-            $table->foreign('id_post')->references('id')->on('posts');
-            $table->foreign('id_user')->references('id')->on('users');
-            $table->foreign('id_type')->references('id')->on('media_types');
+            // $table->foreign('id_post')->references('id')->on('posts');
+            // $table->foreign('id_user')->references('id')->on('users');
+            // $table->foreign('id_type')->references('id')->on('media_types'
+
+            $table->foreignId('post_id')->constrained();
+            $table->foreignId('user_id')->constrained();
+            $table->foreignId('media_types_id')->constrained();
         });
     }
 

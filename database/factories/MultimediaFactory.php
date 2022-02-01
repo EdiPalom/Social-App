@@ -15,9 +15,9 @@ class MultimediaFactory extends Factory
     {
         return [
             'status'=>rand(0,1),
-            'id_post'=>rand(1,90),
-            'id_user'=>rand(1,10),
-            'id_type'=>rand(1,3)
+            'post_id'=>rand(1,90),
+            'user_id'=>rand(1,10),
+            'media_types_id'=>rand(1,3)
         ];
     }
 }

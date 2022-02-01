@@ -16,8 +16,6 @@ class Post extends Model
         'iframe'
     ];
 
-
-
     public function setTitleAttribute($value)
     {
         $title  = (!is_null($value)) ? sanitize_string($value) : null;

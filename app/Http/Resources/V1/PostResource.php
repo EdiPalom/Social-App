@@ -4,6 +4,8 @@ namespace App\Http\Resources\V1;
 
 use Illuminate\Http\Resources\Json\JsonResource;
 
+use App\Helpers\Likes;
+
 class PostResource extends JsonResource
 {
     /**
@@ -22,7 +24,7 @@ class PostResource extends JsonResource
             'author' =>[
                 'username'=>$this->user->username,
                 'picture'=>$this->user->profile
-            ]
+            ],
         ];
     }
 }
