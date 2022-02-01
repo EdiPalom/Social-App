@@ -11,20 +11,28 @@ use App\Models\{User,Post,MediaType,Multimedia,Comment};
 class CommentControllerTest extends TestCase
 {
     use RefreshDatabase;
-    
-    public function test_store_comment()
+
+    public function setUp():void
     {
+        parent::setUp();
+
         User::factory(10)->create();
         Post::factory(90)->create();
         MediaType::factory(3)->create();
         Multimedia::factory(90)->create();
         
-        $user = User::factory()->create();
-
-        $response=$this->actingAs($user,'web')
+        $this->user = User::factory()->create();
+        // $this->post = Post::factory()
+        //             ->for($this->user)
+        //             ->create();
+    }
+    
+    public function test_store_comment()
+    {
+        $response=$this->actingAs($this->user,'web')
                        ->post('comments',
                               [
-                                  'content'=>'new comment'
+                                  'content'=>'new comment',
                               ]);
 
         $response->assertStatus(201);

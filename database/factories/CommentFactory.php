@@ -16,9 +16,9 @@ class CommentFactory extends Factory
         return [
             'content'=>$this->faker->text(50),
             'status'=>rand(0,1),
-            'id_user'=>rand(1,10),
-            'id_multimedia'=>rand(1,90),
-            'id_post'=>rand(1,90)
+            'user_id'=>rand(1,10),
+            'multimedia_id'=>rand(1,90),
+            'post_id'=>rand(1,90)
         ];
     }
 }

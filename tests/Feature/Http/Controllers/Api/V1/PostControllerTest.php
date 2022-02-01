@@ -13,7 +13,7 @@ class PostControllerTest extends TestCase
     use RefreshDatabase;
     public function test_index_posts()
     {
-        $this->withoutExceptionHandling();
+        // $this->withoutExceptionHandling();
         User::factory(10)->create();
         $user = User::factory()->create();
         Post::factory(5)->create();
@@ -70,7 +70,8 @@ class PostControllerTest extends TestCase
 
         // $this->assertEquals($post->user->username,$user->username);
         
-        $response = $this->actingAs($user,'sanctum')->json('GET',"/api/posts/$post->id");
+        $response = $this->actingAs($user,'sanctum')
+                         ->json('GET',"/api/posts/$post->id");
 
 
         // $response->assertStatus(200)

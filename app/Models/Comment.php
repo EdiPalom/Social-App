@@ -10,11 +10,19 @@ class Comment extends Model
     use HasFactory;
 
     protected $fillable = [
-        'id_user',
-        'id_multimedia',
-        'id_post',
+        'user_id',
+        'multimedia_id',
+        'post_id',
         'content',
     ];
+
+    public function user(){
+        return $this->belongsTo(User::class);
+    }
+
+    public function post(){
+        return $this->belongsTo(Post::class);
+    }
 
     public function setContentAttribute($value)
     {

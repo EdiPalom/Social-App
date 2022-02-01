@@ -16,7 +16,7 @@ class UserFactory extends Factory
     {
         return [
             'username'=>$this->faker->unique()->name(),
-            'name' => $this->faker->name(),
+            'name' => $this->faker->name,
             'lastname'=>$this->faker->lastName(),
             'phone_number'=> $this->faker->unique()->phoneNumber(),
             'birth_date'=>$this->get_rand_birth_date(date("Y-m-d")),

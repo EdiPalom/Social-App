@@ -18,8 +18,21 @@ use Illuminate\Support\Facades\Route;
 //     return $request->user();
 // });
 
-use App\Http\Controllers\Api\V1\PostController;
+use App\Http\Controllers\Api\V1\PostController as Post;
+use App\Http\Controllers\Api\V1\CommentController as Comment;
 
-Route::apiResource('posts',PostController::class)
+Route::apiResource('posts',Post::class)
     ->middleware('auth:sanctum')
     ->only(['index','show']);
+
+Route::apiResource('comments',Comment::class)
+    ->middleware('auth:sanctum')
+    ->only('show');
+
+Route::get('comments/post/{post}',[Comment::class,'index_post'])
+    ->middleware('auth:sanctum')
+    ->name('comments.post');
+
+Route::get('comments/media/{comment}',[Comment::class,'index_media'])
+    ->middleware('auth:sanctum')
+    ->name('comments.media');

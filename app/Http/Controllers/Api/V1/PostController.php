@@ -58,7 +58,7 @@ class PostController extends Controller
         // return new PostResource($post);
         
         $data = new PostResource($post);
-        return response()->json($data,200);
+        return response()->json($data);
     }
 
     /**

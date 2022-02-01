@@ -1,22 +1,16 @@
 <?php
 
-namespace App\Http\Controllers\Backend;
+namespace App\Http\Controllers\Api\V1;
 
 use App\Http\Controllers\Controller;
-use App\Models\Comment;
+use App\Models\{Comment,Post};
 use Illuminate\Http\Request;
 
-use App\Http\Requests\CommentRequest;
+use App\Http\Resources\V1\CommentResource;
+use App\Http\Resources\V1\CommentCollection;
 
 class CommentController extends Controller
 {
-
-    protected $comment;
-
-    public function __construct(Comment $comment)
-    {
-        $this->comment = $comment;
-    }
     /**
      * Display a listing of the resource.
      *
@@ -24,7 +18,28 @@ class CommentController extends Controller
      */
     public function index()
     {
-        //
+        // $comments = $this->comment->latest()->
+        // return 
+    }
+
+    public function index_post(Post $post)
+    {
+        // $comments = $comment->where('post_id',$comment->post->id)->get();
+        $comments = new CommentCollection(
+            Comment::where('post_id',$post->id)->get());
+
+        // dd($comments);
+
+        // $comments = Comment::where('post_id',$post->id)->get();
+
+        // return response()->json($comments);
+
+        return $comments;
+    }
+
+    public function index_media(Comment $comment)
+    {
+        
     }
 
     /**
@@ -43,16 +58,9 @@ class CommentController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(CommentRequest $request)
+    public function store(Request $request)
     {
-        $comment = $this->comment->create([
-            'user_id'=>auth()->user()->id,
-            'multimedia_id'=> null,
-            'content'=>$request->content,
-            'post_id'=>rand(1,90) // TODO: get by cookie
-        ]);
-        
-        return response()->json($comment,201);
+        //
     }
 
     /**
@@ -63,7 +71,8 @@ class CommentController extends Controller
      */
     public function show(Comment $comment)
     {
-        //
+        $data = new CommentResource($comment);
+        return response()->json($data);
     }
 
     /**
@@ -84,10 +93,9 @@ class CommentController extends Controller
      * @param  \App\Models\Comment  $comment
      * @return \Illuminate\Http\Response
      */
-    public function update(CommentRequest $request, Comment $comment)
+    public function update(Request $request, Comment $comment)
     {
-        $comment->update($request->all());
-        return response()->json($comment,200);
+        //
     }
 
     /**
@@ -98,7 +106,6 @@ class CommentController extends Controller
      */
     public function destroy(Comment $comment)
     {
-        // TODO: don't delete just change the status
-        $comment->delete();
+        //
     }
 }
