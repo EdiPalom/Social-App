@@ -4,10 +4,22 @@ namespace Tests\Unit\Models;
 
 use PHPUnit\Framework\TestCase;
 
-use App\Models\Post;
+use App\Models\{Post,User};
 
 class PostTest extends TestCase
 {
+
+    public function test_user_relation()
+    {
+        $user = new User;
+        $user->username = "testing";
+        $user->id = 1;
+        $post = new Post;
+        $post->id_user = $user->id;
+
+        dd($post->user->username);
+    }
+    
     public function test_set_post_title_in_lowercase()
     {
         $post = new Post;

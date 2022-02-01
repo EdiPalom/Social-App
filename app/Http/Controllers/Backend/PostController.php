@@ -51,7 +51,7 @@ class PostController extends Controller
         // $cleaned_iframe => strip_tags($request->iframe,'<iframe>');
 
         $post = $this->post->create([
-            'id_user'=>auth()->user()->id,
+            'user_id'=>auth()->user()->id,
             'title'=>$request->title,
             'body'=>$request->content,
             'iframe'=>$request->iframe

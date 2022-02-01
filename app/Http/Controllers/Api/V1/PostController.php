@@ -4,7 +4,11 @@ namespace App\Http\Controllers\Api\V1;
 
 use App\Http\Controllers\Controller;
 use App\Models\Post;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
+
+use App\Http\Resources\V1\PostResource;
+use App\Http\Resources\V1\PostCollection;
 
 class PostController extends Controller
 {
@@ -21,7 +25,9 @@ class PostController extends Controller
      */
     public function index()
     {
-        $posts = $this->post->latest()->get();
+        // $posts = $this->post->latest()->get();
+
+        return new PostCollection($this->post->latest()->get());
 
         // return response()->json(compact('posts'),200);
 
@@ -47,7 +53,12 @@ class PostController extends Controller
      */
     public function show(Post $post)
     {
-        //
+        // $images = DB::table('media_data')->where('id_post',$post->id)->get();
+        // return response()->json($post,200);
+        // return new PostResource($post);
+        
+        $data = new PostResource($post);
+        return response()->json($data,200);
     }
 
     /**

@@ -10,11 +10,13 @@ class Post extends Model
     use HasFactory;
 
     protected $fillable = [
-        'id_user',
+        'user_id',
         'title',
         'body',
         'iframe'
     ];
+
+
 
     public function setTitleAttribute($value)
     {
@@ -37,5 +39,15 @@ class Post extends Model
     {
         $iframe = (!is_null($value)) ? sanitize_iframe($value) : null;
         $this->attributes['iframe'] = $iframe;
+    }
+
+    // public function user()
+    // {
+    //     return $this->belongsTo(User::class,'foreign_key'); 
+    // }
+
+    public function user()
+    {
+        return $this->belongsTo(User::class); 
     }
 }
