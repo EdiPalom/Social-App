@@ -34,7 +34,7 @@ class CommentControllerTest extends TestCase
     }
 
     public function test_comment_post_index(){
-        $this->withoutExceptionHandling();
+        // $this->withoutExceptionHandling();
         
         $response = $this->actingAs($this->user,'sanctum')
                          ->json('GET',"/api/comments/post/{$this->post->id}");

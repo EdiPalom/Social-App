@@ -17,7 +17,7 @@ class MediaDataFactory extends Factory
     {
         return [
             'post_id'=>Post::factory(),
-            'media_types_id'=>rand(1,3),
+            'media_type_id'=>rand(1,3),
             'url'=>$this->faker->imageUrl(1280,720),
             'description'=>$this->faker->text(100)
         ];

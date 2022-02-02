@@ -21,7 +21,7 @@ class CreateMediaDataTable extends Migration
             $table->timestamps();
 
             $table->foreignId('post_id')->constrained();
-            $table->foreignId('media_types_id')->constrained();
+            $table->foreignId('media_type_id')->constrained();
         });
     }
 

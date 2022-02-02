@@ -11,7 +11,7 @@ class MediaData extends Model
 
     protected $fillable=[
         'post_id',
-        'media_types_id',
+        'media_type_id',
         'url',
         'description'
     ];
@@ -21,8 +21,9 @@ class MediaData extends Model
         return $this->belongsTo(Post::class);
     }
 
-    public function media_types()
+    public function mediaType()
     {
-        return $this->hasOne(MediaType::class);
+        // return $this->hasOne(MediaType::class);
+        return $this->belongsTo(MediaType::class);
     }
 }

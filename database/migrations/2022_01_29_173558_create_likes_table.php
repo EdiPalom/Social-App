@@ -17,6 +17,7 @@ class CreateLikesTable extends Migration
             $table->id();
             // $table->bigInteger('id_user')->unsigned();
             $table->bigInteger('media_data_id')->unsigned()->nullable()->default(null);
+            // $table->bigInteger('media_data_id')->unsigned()->nullable();
             
             $table->timestamps();
 

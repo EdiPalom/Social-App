@@ -24,7 +24,7 @@ class Comment extends Model
         return $this->belongsTo(Post::class);
     }
 
-    public function media_data()
+    public function mediaData()
     {
         return $this->belongsTo(MediaData::class);
     }
