@@ -16,13 +16,15 @@ class CreateLikesTable extends Migration
         Schema::create('likes', function (Blueprint $table) {
             $table->id();
             // $table->bigInteger('id_user')->unsigned();
-            // $table->bigInteger('id_multimedia')->unsigned();
+            $table->bigInteger('media_data_id')->unsigned()->nullable()->default(null);
+            
             $table->timestamps();
 
             // $table->foreign('id_user')->references('id')->on('users');
-            // $table->foreign('id_multimedia')->references('id')->on('multimedia');
+            $table->foreign('media_data_id')->references('id')->on('media_data');
+            
             $table->foreignId('user_id')->constrained();
-            $table->foreignId('multimedia_id')->nullable()->constrained();
+            // $table->foreignId('media_data_id')->nullable()->constrained();
             $table->foreignId('post_id')->constrained();
         });
     }

@@ -6,80 +6,64 @@ use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
 use Tests\TestCase;
 
-use App\Models\{User,Post,Multimedia,MediaType,Like};
+use App\Models\{User,Post,MediaType,Like};
 
 class LikeControllerTest extends TestCase
 {
     use RefreshDatabase;
+
+    public function setUp():void
+    {
+        parent::setUp();
+                    
+        $this->user = User::factory()->create();
+        $this->post = Post::factory()->create();
+        $this->like = Like::factory()
+                    ->for($this->post)
+                    ->create(
+            [
+                'media_data_id'=>null,
+            ]
+        );
+    }
     
     public function test_like_store()
     {
-        User::factory(10)->create();
-        Post::factory(90)->create();
-        MediaType::factory(3)->create();
-        Multimedia::factory(90)->create();
-                
-        $user = User::factory()->create();
-        $multimedia = Multimedia::factory()->create();
-        
-        $response = $this->actingAs($user,'web')->post('likes',[
-            'id_multimedia'=>$multimedia->id
+        // $this->withoutExceptionHandling();
+            
+        $response = $this->actingAs($this->user,'web')->post('likes',[
+            'post_id'=>$this->post->id,
         ]);
 
         $response->assertStatus(201);
 
-        $this->assertDatabaseHas('likes',['id_user'=>$user->id]);
+        $this->assertDatabaseHas('likes',['user_id'=>$this->user->id]);
     }
 
     public function test_like_store_invalid()
     {
-        User::factory(10)->create();
-        Post::factory(90)->create();
-        MediaType::factory(3)->create();
-        Multimedia::factory(90)->create();
-                
-        $user = User::factory()->create();
-        $multimedia = Multimedia::factory()->create();
-        
-        $response = $this->actingAs($user,'web')->post('likes',[
-            'id_multimedia'=>''
+        $response = $this->actingAs($this->user,'web')->post('likes',[
+            'post_id'=>''
         ]);
 
         // $response->assertStatus(301);
-        $response->assertSessionHasErrors('id_multimedia');
+        $response->assertSessionHasErrors('post_id');
         
-        $this->assertDatabaseMissing('likes',['id_user'=>$user->id]);
+        $this->assertDatabaseMissing('likes',['user_id'=>$this->user->id]);
     }
 
     public function test_like_delete()
     {
-        User::factory(10)->create();
-        Post::factory(90)->create();
-        MediaType::factory(3)->create();
-        Multimedia::factory(90)->create();
-                
-        $user = User::factory()->create();
-        $multimedia = Multimedia::factory()->create();
-        $like = Like::factory()->create();
-        
-        $response = $this->actingAs($user,'web')->delete("likes/$like->id");
+        $response = $this->actingAs($this->user,'web')->delete("likes/{$this->like->id}");
 
         $response->assertStatus(200);
 
-        $this->assertDatabaseMissing('likes',['id'=>$like->id]);
+        $this->assertDatabaseMissing('likes',['id'=>$this->like->id]);
     }
 
     public function test_like_invalid_delete()
-    {
-        User::factory(10)->create();
-        Post::factory(90)->create();
-        MediaType::factory(3)->create();
-        Multimedia::factory(90)->create();
-                
-        $user = User::factory()->create();
-        $multimedia = Multimedia::factory()->create();
-          
-        $response = $this->actingAs($user,'web')->delete("likes/123123");
+    {          
+        $response = $this->actingAs($this->user,'web')->delete("likes/123123");
 
         $response->assertStatus(404);
 

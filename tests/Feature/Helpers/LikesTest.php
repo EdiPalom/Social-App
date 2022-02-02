@@ -6,7 +6,7 @@ use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
 use Tests\TestCase;
 
-use App\Models\{Post,User,Like,Multimedia,MediaType};
+use App\Models\{Post,User,Like,MediaType};
 use App\Helpers\Likes;
 
 class LikesTest extends TestCase
@@ -19,19 +19,13 @@ class LikesTest extends TestCase
 
         MediaType::factory(3)->create();
         $this->user = User::factory()->create();
+
         $this->post = Post::factory()
                     ->for($this->user)
                     ->create();
         
-        $this->multimedia = Multimedia::factory()
-                          ->for($this->user)
-                          ->for($this->post)
-                          ->create();
-        
         $this->like = Like::factory()
                     ->for($this->post)
-                    ->for($this->user)
-                    ->for($this->multimedia)
                     ->create();
     }
     

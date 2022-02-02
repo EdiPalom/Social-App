@@ -27,7 +27,7 @@ class LikeControllerTest extends TestCase
                     ->for($this->user)
                     ->for($this->post)
                     ->create([
-                      'multimedia_id'=>null,
+                      'media_data_id'=>null,
                     ]);
     }
     

@@ -15,12 +15,13 @@ class CreateMediaDataTable extends Migration
     {
         Schema::create('media_data', function (Blueprint $table) {
             $table->id();
-            $table->bigInteger('id_multimedia')->unsigned();
             $table->string('url');
             $table->text('description')->nullable();
+            $table->boolean('status')->default(1);
             $table->timestamps();
-            $table->foreign('id_multimedia')->references('id')->on('multimedia');
-            
+
+            $table->foreignId('post_id')->constrained();
+            $table->foreignId('media_types_id')->constrained();
         });
     }
 

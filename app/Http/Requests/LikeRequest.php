@@ -24,7 +24,7 @@ class LikeRequest extends FormRequest
     public function rules()
     {
         return [
-            'id_multimedia'=>'required'
+            'post_id'=>'required'
         ];
     }
 }

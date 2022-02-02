@@ -11,7 +11,7 @@ class Comment extends Model
 
     protected $fillable = [
         'user_id',
-        'multimedia_id',
+        'media_data_id',
         'post_id',
         'content',
     ];
@@ -22,6 +22,11 @@ class Comment extends Model
 
     public function post(){
         return $this->belongsTo(Post::class);
+    }
+
+    public function media_data()
+    {
+        return $this->belongsTo(MediaData::class);
     }
 
     public function setContentAttribute($value)

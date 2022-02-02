@@ -6,7 +6,7 @@ use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
 use Tests\TestCase;
 
-use App\Models\{User,Post,MediaType,Multimedia,Comment};
+use App\Models\{User,Post,MediaType,Comment};
 
 class CommentControllerTest extends TestCase
 {
@@ -16,40 +16,34 @@ class CommentControllerTest extends TestCase
     {
         parent::setUp();
 
-        User::factory(10)->create();
-        Post::factory(90)->create();
-        MediaType::factory(3)->create();
-        Multimedia::factory(90)->create();
+        $this->post = Post::factory()->create();
         
         $this->user = User::factory()->create();
-        // $this->post = Post::factory()
-        //             ->for($this->user)
-        //             ->create();
+        
+        $this->comment = Comment::factory()->create([
+            'media_data_id'=>null,
+        ]);
     }
     
     public function test_store_comment()
     {
+        // $this->withoutExceptionHandling();
         $response=$this->actingAs($this->user,'web')
                        ->post('comments',
                               [
-                                  'content'=>'new comment',
+                                  'content'=>$this->comment->content,
+                                  'post_id'=>$this->post->id,
                               ]);
 
         $response->assertStatus(201);
 
-        $this->assertDatabaseHas('comments',['content'=>'new comment']);
+        $this->assertDatabaseHas('comments',
+                                 ['content'=>$this->comment->content]);
     }
 
     public function test_store_void_comment()
-    {
-        User::factory(10)->create();
-        Post::factory(90)->create();
-        MediaType::factory(3)->create();
-        Multimedia::factory(90)->create();
-        
-        $user = User::factory()->create();
-
-        $response=$this->actingAs($user,'web')
+    {        
+        $response=$this->actingAs($this->user,'web')
                        ->post('comments',
                               [
                                   'content'=>''
@@ -62,20 +56,12 @@ class CommentControllerTest extends TestCase
     }
 
     public function test_edit_comment()
-    {
-                User::factory(10)->create();
-        Post::factory(90)->create();
-        MediaType::factory(3)->create();
-        Multimedia::factory(90)->create();
-        
-        $user = User::factory()->create();
-
-        $comment = Comment::factory()->create();
-
-        $response=$this->actingAs($user,'web')
-                       ->put("comments/$comment->id",
+    {        
+        $response=$this->actingAs($this->user,'web')
+                       ->put("comments/{$this->comment->id}",
                               [
-                                  'content'=>'new content'
+                                  'content'=>'new content',
+                                  'post_id'=>$this->post->id
                               ]);
 
         $response->assertStatus(200);
@@ -85,19 +71,11 @@ class CommentControllerTest extends TestCase
 
     public function test_edit_comment_invalid()
     {
-        User::factory(10)->create();
-        Post::factory(90)->create();
-        MediaType::factory(3)->create();
-        Multimedia::factory(90)->create();
-        
-        $user = User::factory()->create();
-
-        $comment = Comment::factory()->create();
-
-        $response=$this->actingAs($user,'web')
-                       ->put("comments/$comment->id",
+        $response=$this->actingAs($this->user,'web')
+                       ->put("comments/{$this->comment->id}",
                               [
-                                  'content'=>''
+                                  'content'=>'',
+                                  'post_id'=>$this->post->id
                               ]);
 
         $response->assertStatus(302);
@@ -108,28 +86,17 @@ class CommentControllerTest extends TestCase
 
     public function test_comment_delete()
     {
-        User::factory(10)->create();
-        Post::factory(90)->create();
-        MediaType::factory(3)->create();
-        Multimedia::factory(90)->create();
-        
-        $user = User::factory()->create();
-
-        $comment = Comment::factory()->create();
-
-        $response=$this->actingAs($user,'web')
-                       ->delete("comments/$comment->id");
+        $response=$this->actingAs($this->user,'web')
+                       ->delete("comments/{$this->comment->id}");
 
         $response->assertStatus(200);
 
-        $this->assertDatabaseMissing('comments',['id'=>$comment->id]);
+        $this->assertDatabaseMissing('comments',['id'=>$this->comment->id]);
     }
 
     public function test_comment_invalid_delete()
     {   
-        $user = User::factory()->create();
-
-        $response=$this->actingAs($user,'web')
+        $response=$this->actingAs($this->user,'web') 
                        ->delete("comments/123123");
 
         $response->assertStatus(404);

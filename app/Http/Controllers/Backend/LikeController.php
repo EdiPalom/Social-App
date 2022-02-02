@@ -45,8 +45,9 @@ class LikeController extends Controller
     public function store(LikeRequest $request)
     {
         $this->like->create([
-            'id_user'=>auth()->user()->id,
-            'id_multimedia'=>$request->id_multimedia
+            'user_id'=>auth()->user()->id,
+            'post_id'=>$request->post_id,
+            'media_data_id'=>$request->media_data_id,
         ]);
 
         return response()->json(null,201);

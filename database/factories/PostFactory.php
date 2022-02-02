@@ -3,6 +3,7 @@
 namespace Database\Factories;
 
 use Illuminate\Database\Eloquent\Factories\Factory;
+use App\Models\User;
 
 class PostFactory extends Factory
 {
@@ -14,7 +15,7 @@ class PostFactory extends Factory
     public function definition()
     {
         return [
-            'user_id'=>rand(1,10),
+            'user_id'=>User::factory(),
             'title'=>$this->faker->sentence,
             'body'=>$this->faker->text(100),
             'status'=>rand(0,1),

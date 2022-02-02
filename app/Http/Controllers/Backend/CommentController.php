@@ -47,9 +47,9 @@ class CommentController extends Controller
     {
         $comment = $this->comment->create([
             'user_id'=>auth()->user()->id,
-            'multimedia_id'=> null,
+            'media_data_id'=> null,
             'content'=>$request->content,
-            'post_id'=>rand(1,90) // TODO: get by cookie
+            'post_id'=>$request->post_id // TODO: get by cookie
         ]);
         
         return response()->json($comment,201);

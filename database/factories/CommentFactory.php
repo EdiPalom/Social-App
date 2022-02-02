@@ -4,6 +4,8 @@ namespace Database\Factories;
 
 use Illuminate\Database\Eloquent\Factories\Factory;
 
+use App\Models\{User,Post,MediaData};
+
 class CommentFactory extends Factory
 {
     /**
@@ -14,11 +16,10 @@ class CommentFactory extends Factory
     public function definition()
     {
         return [
+            'user_id'=>User::factory(),
+            'media_data_id'=>MediaData::factory(),
+            'post_id'=>Post::factory(),
             'content'=>$this->faker->text(50),
-            'status'=>rand(0,1),
-            'user_id'=>rand(1,10),
-            'multimedia_id'=>rand(1,90),
-            'post_id'=>rand(1,90)
         ];
     }
 }

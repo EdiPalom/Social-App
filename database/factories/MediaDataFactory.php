@@ -4,6 +4,8 @@ namespace Database\Factories;
 
 use Illuminate\Database\Eloquent\Factories\Factory;
 
+use App\Models\Post;
+
 class MediaDataFactory extends Factory
 {
     /**
@@ -14,7 +16,8 @@ class MediaDataFactory extends Factory
     public function definition()
     {
         return [
-            'id_multimedia'=>rand(1,90),
+            'post_id'=>Post::factory(),
+            'media_types_id'=>rand(1,3),
             'url'=>$this->faker->imageUrl(1280,720),
             'description'=>$this->faker->text(100)
         ];

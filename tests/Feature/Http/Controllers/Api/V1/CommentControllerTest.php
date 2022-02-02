@@ -22,19 +22,19 @@ class CommentControllerTest extends TestCase
                        ->for($this->user)
                        ->for($this->post)
                        ->create([
-                           'multimedia_id'=>null
+                           'media_data_id'=>null
                        ]);
 
         $this->comment_collection = Comment::factory(3)
                                   ->for($this->user)
                                   ->for($this->post)
                                   ->create([
-                                      'multimedia_id'=>null
+                                      'media_data_id'=>null
                                   ]);
     }
 
     public function test_comment_post_index(){
-        // $this->withoutExceptionHandling();
+        $this->withoutExceptionHandling();
         
         $response = $this->actingAs($this->user,'sanctum')
                          ->json('GET',"/api/comments/post/{$this->post->id}");

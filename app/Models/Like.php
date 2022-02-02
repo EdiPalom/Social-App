@@ -11,7 +11,8 @@ class Like extends Model
 
     protected $fillable = [
         'user_id',
-        'multimedia_id'
+        'post_id',
+        'media_data_id'
     ];
 
     public function user()
@@ -24,8 +25,8 @@ class Like extends Model
         return $this->belongsTo(Post::class);
     }
 
-    public function multimedia()
+    public function media_data()
     {
-        return $this->belongsTo(Multimedia::class);
+        return $this->belongsTo(MediaData::class);
     }
 }

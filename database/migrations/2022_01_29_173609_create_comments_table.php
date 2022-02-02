@@ -17,18 +17,25 @@ class CreateCommentsTable extends Migration
             $table->id();
             $table->text('content');
             $table->boolean('status')->default(1);
+            // $table->bigInteger('media_data_id')->unsigned();
+            
+            // $table->unsignedBigInteger('media_data_id')->nullable()->change();
+            $table->unsignedBigInteger('media_data_id')->nullable();
             $table->timestamps();
+            $table->foreign('media_data_id')->references('id')->on('media_data');
 
             $table->foreignId('user_id')->constrained();
-            $table->foreignId('multimedia_id')->nullable()->constrained();
+   
             $table->foreignId('post_id')->constrained();
 
+            // $table->foreignId('media_data_id')->nullable()->constrained();
+
             // $table->bigInteger('user_id')->unsigned();
-            // $table->bigInteger('id_multimedia')->unsigned();
+
             // $table->bigInteger('post_id')->unsigned();
 
             // $table->foreign('user_id')->references('id')->on('users');
-            // $table->foreign('id_multimedia')->nullable()->references('id')->on('multimedia');
+
             // $table->foreign('post_id')->references('id')->on('posts');
 
         });
