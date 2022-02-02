@@ -22,8 +22,8 @@ class HomePageControllerTest extends TestCase
 
         $response = $this->actingAs($user,'web')->get('/');
 
-        $response->assertStatus(200);
-                 // ->assertSee($post->title)
-                 // ->assertDontSee('Empty Posts');
+        $response->assertStatus(200)
+                 ->assertSee($post->title)
+                 ->assertDontSee('Empty Posts');
     }
 }
