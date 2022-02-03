@@ -13,6 +13,7 @@
 
     <script type="text/javascript" src="{{ asset('js/app.js') }}" defer></script>
 
+    <link href="{{ asset('css/normalize.css') }}" rel="stylesheet"/>
     <link href="{{ asset('css/app.css') }}" rel="stylesheet"/>
   </head>
   
