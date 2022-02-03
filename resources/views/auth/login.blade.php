@@ -4,6 +4,10 @@
 Login
 @endsection
 
+@section('header')
+<img class="header__logo" src="{{ asset('img/logo.svg') }}" alt="logo.png" />
+@endsection
+
 @section('content')
 <form method="POST" id="" action="{{ route('login') }}">
   @csrf
