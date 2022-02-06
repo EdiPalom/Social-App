@@ -30,17 +30,27 @@ Login
   <form method="POST" class="form" action="{{ route('login') }}">
     @csrf
 
-    <label class="form__label" for="email">Email</label>
-    <input class="form__input" name="email" type="email" value="" placeholder="mail@example.com"/>
-    <label class="form__label" class="form__label" for="password">Password</label>
-    <input class="form__input" name="password" type="password" value="" placeholder="password"/>
+    <div class="form__group">
+      <label class="form__label" for="email">Email</label>
+      <input class="form__input" name="email" type="email" value="" placeholder="mail@example.com"/>      
+    </div>
+    
+
+    <div class="form__group">
+      <label class="form__label" class="form__label" for="password">Password</label>
+      <input class="form__input" name="password" type="password" value="" placeholder="password"/>      
+    </div>
+
 
     <div class="form__group">
       <input name="remember" type="checkbox" value=""/>
       <label class="form__label" for="remember">Remember me</label>
     </div>
-    
-    <input class="form__button" name="" type="submit" value="Send"/>
+
+    <div class="form__group">
+      <input class="form__button" name="" type="submit" value="Send"/>
+    </div>
+
   </form>  
 </section>
 

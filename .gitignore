@@ -15,3 +15,4 @@ yarn-error.log
 /.vscode
 .env.example
 public/img/
+public/icons/

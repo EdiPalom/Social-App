@@ -36,7 +36,7 @@ h1{
     width:100%;
     text-align:center;
 
-     background-image: linear-gradient(to top, #105477, #0b4c6c, #064361, #033b56, #00334b);
+    background-image: linear-gradient(to top, #105477, #0b4c6c, #064361, #033b56, #00334b);
 }
 
 .header__title{
@@ -62,63 +62,22 @@ h1{
 }
 
 .main {
-    padding:40px 0;
+    /* padding:40px 0; */
 	width: 100%;
 	height: auto;
 	background-image: linear-gradient(to top, #1a9cdb, #1889c1, #1577a8, #13658f, #105477);
 }
 
-.form{
-    width:60%;
-    margin:0 auto;
-    display:flex;
-    flex-direction:column;
-}
-
-.form__label{
-    margin-top:var(--md);
-    margin-bottom:0.4rem;
-    font-size:var(--md);
-    font-weight:bold;
-    color:var(--white);
-}
-
-.form__input{
-    height:40px;
-    padding:0.8rem;
-
-    font-size:var(--sm);
-
-    background-color:var(--white);
-    border:solid 2px #CFD8DC;
-    border-radius:10px;
-}
-
-.form__button{
-    margin-top:var(--md);
-    height:40px;
-    padding:8px;
-    font-size:var(--md);
-
-    background-color:#81C784;
-    color:var(--white);
-    border:solid 2px #A5D6A7;
-    border-radius:10px;
-}
-
-.form__button:hover{
-    background-color:#66BB6A;
-    border:solid 2px #81C784;
-}
-
-.form__group{
-    margin-top:var(--md);
-    margin-bottom:0.4rem;
+.main .posts{
+    padding:40px 0;
+    background-image:url('../img/blue-back.jpg');
 }
 
 .main-nav{
     width:100%;
     height:50px;
+
+    background-image:url('../img/blue-nav.jpg');
 }
 
 .main-nav__list
@@ -144,6 +103,54 @@ h1{
     color:var(--white);
 }
 
+.form{
+    width:60%;
+    margin:0 auto;
+    display:flex;
+    flex-direction:column;
+}
+
+.form__label{
+    font-size:var(--md);
+    font-weight:bold;
+    color:var(--white);
+}
+
+.form__input{
+    height:40px;
+    
+    padding:0.8rem;
+    margin-top:0.4rem;
+
+    font-size:var(--sm);
+
+    background-color:var(--white);
+    border:solid 2px #CFD8DC;
+    border-radius:10px;
+}
+
+.form__button{
+    width:100%;
+    height:40px;
+    padding:8px;
+    font-size:var(--md);
+
+    background-color:#81C784;
+    color:var(--white);
+    border:solid 2px #A5D6A7;
+    border-radius:10px;
+}
+
+.form__button:hover{
+    background-color:#66BB6A;
+    border:solid 2px #81C784;
+}
+
+.form__group{
+    margin-top:var(--md);
+    margin-bottom:0.4rem;
+}
+
 .alert{
     width:70%;
     height:auto;
@@ -164,4 +171,3 @@ h1{
     border:solid 2px #EF9A9A;
     
 }
-

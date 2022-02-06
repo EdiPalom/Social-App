@@ -29,16 +29,19 @@ Home
 
 @section('content')
 
-@if (session('status'))
-<div class="alert alert-success">
-  {{ session('status') }}
-</div>
-@endif
+<section class="posts">
+  @foreach($posts as $post)
+  <h1>{{ $post->title }}</h1>
+  <p>{{ $post->body }}</p>
+  @endforeach  
+</section>
+<!-- @if (session('status')) -->
+<!-- <div class="alert alert-success"> -->
+<!--   {{ session('status') }} -->
+<!-- </div> -->
+<!-- @endif -->
 
 
-@foreach($posts as $post)
-<h1>{{ $post->title }}</h1>
-<p>{{ $post->body }}</p>
-@endforeach
+
 
 @endsection

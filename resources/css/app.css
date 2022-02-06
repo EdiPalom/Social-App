@@ -36,7 +36,7 @@ h1{
     width:100%;
     text-align:center;
 
-     background-image: linear-gradient(to top, #105477, #0b4c6c, #064361, #033b56, #00334b);
+    background-image: linear-gradient(to top, #105477, #0b4c6c, #064361, #033b56, #00334b);
 }
 
 .header__title{
