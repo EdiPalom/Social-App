@@ -11,6 +11,10 @@
       @yield('title')
     </title>
 
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Ephesis&family=Roboto&display=swap" rel="stylesheet"> 
+    
     <script type="text/javascript" src="{{ asset('js/app.js') }}" defer></script>
 
     <link href="{{ asset('css/normalize.css') }}" rel="stylesheet"/>
@@ -18,11 +22,11 @@
   </head>
   
   <body>
-    <header>
+    <header class="header">
       @yield('header')
     </header>
     
-	<main>
+	<main class="main">
       @yield('content')
     </main>
 
