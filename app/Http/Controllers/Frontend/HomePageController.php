@@ -15,7 +15,7 @@ class HomePageController extends Controller
      */
     public function index()
     {
-        $posts = Post::latest()->get();
+        $posts = Post::latest()->get()->take(10);
 
         return view('home',
         [
