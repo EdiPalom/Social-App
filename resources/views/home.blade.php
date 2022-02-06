@@ -7,20 +7,17 @@ Home
 @section('header')
 <nav class="main-nav" aria-label="Main">
   <ul class="main-nav__list">
+
     <li class="main-nav__item">
-      <a href="#" class="main-nav__link">Home</a>
-    </li>
-    <li class="main-nav__item">
-      <a href="#" class="main-nav__link">Work</a>
-    </li>
-    <li class="main-nav__item">
-      <a href="#" class="main-nav__link">About us</a>
+      <img class="main-nav__user-profile" alt="" src="{{ Auth::user()->profile }}"/>
+      <a href="#" class="main-nav__link">{{ Auth::user()->username }}</a>
     </li>
 
     <li>
       <form method="POST" id="" action="{{ route('logout') }}">
         @csrf
-        <input name="" type="submit" value="Log Out"/>
+        <input class="form__input--logout" name="" type="submit" value=""/>
+        <!-- <button class="form__input--logout" type="submit"></button> -->
       </form>
     </li>
   </ul>
