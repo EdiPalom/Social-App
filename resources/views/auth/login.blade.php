@@ -16,10 +16,17 @@ Login
 <section class="characters">
   <img alt="boy1.jpg" src="{{ asset('img/boy1_sm.jpg') }}"/>
   <img alt="boy2.png" src="{{ asset('img/boy2_sm.png') }}"/>
-  <img alt="girl.png" src="{{ asset('img/girl_sm.png') }}"/>
+  <img alt="girl.png" src="{{ asset('img/girl_sm.jpg') }}"/>
 </section>
 
 <section>
+
+  @foreach($errors->all() as $error)
+  <div class="alert alert--error" onclick="display_none(this);">
+    {{ $error }}
+  </div>
+  @endforeach
+  
   <form method="POST" class="form" action="{{ route('login') }}">
     @csrf
 
@@ -36,5 +43,12 @@ Login
     <input class="form__button" name="" type="submit" value="Send"/>
   </form>  
 </section>
+
+<script>
+  function display_none(obj)
+  {
+     obj.style.display = "none";
+  }
+</script>
 
 @endsection
