@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\Backend;
 
 use App\Http\Controllers\Controller;
-use App\Models\Post;
+use App\Models\{Post,MediaData};
 use Illuminate\Http\Request;
 
 // use App\Http\Requests\PostRequest;
@@ -53,11 +53,23 @@ class PostController extends Controller
         $post = $this->post->create([
             'user_id'=>auth()->user()->id,
             'title'=>$request->title,
-            'body'=>$request->content,
+            'body'=>$request->body,
             'iframe'=>$request->iframe
         ]);
 
-        return response()->json($post,201);
+        if($request->file('file') and $request->file('file')->isValid())
+        {
+            $request->file('file')->store('images');
+
+            MediaData::create([
+                'post_id'=>$post->id,
+                'url'=>$request->file('file')->hashName(),
+                'media_type_id'=>'1'
+            ]);
+        }
+
+        // return response()->json($post,201);
+        return back();
     }
 
     /**

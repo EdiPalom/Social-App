@@ -26,9 +26,7 @@
       @yield('header')
     </header>
     
-	<main class="main">
-      @yield('content')
-    </main>
+    @yield('content')
 
     <footer>
       @yield('footer')
