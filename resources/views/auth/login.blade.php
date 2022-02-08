@@ -23,7 +23,7 @@ Login
   <section>
 
     @foreach($errors->all() as $error)
-    <div class="alert alert--error" onclick="display_none(this);">
+    <div class="alert alert--error" onclick="display_none(this)">
       {{ $error }}
     </div>
     @endforeach
@@ -54,14 +54,13 @@ Login
 
     </form>  
   </section>
-
-  <script>
-    function display_none(obj)
-    {
-    obj.style.display = "none";
-    }
-  </script>  
 </main>
 
+@endsection
 
+@section('script')
+function display_none(obj)
+{
+    obj.style.display = "none";
+}
 @endsection

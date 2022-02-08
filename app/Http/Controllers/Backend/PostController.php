@@ -59,11 +59,12 @@ class PostController extends Controller
 
         if($request->file('file') and $request->file('file')->isValid())
         {
-            $request->file('file')->store('images');
+            // $url = $request->file('file')->store('images','public');
+            $url = $request->file('file')->store('images');
 
             MediaData::create([
                 'post_id'=>$post->id,
-                'url'=>$request->file('file')->hashName(),
+                'url'=>$url,
                 'media_type_id'=>'1'
             ]);
         }

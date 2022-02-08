@@ -31,5 +31,9 @@
     <footer>
       @yield('footer')
     </footer>
+
+    <script type="text/javascript">
+      @yield('script')
+    </script>
   </body>
 </html>

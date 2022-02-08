@@ -26,4 +26,9 @@ class MediaData extends Model
         // return $this->hasOne(MediaType::class);
         return $this->belongsTo(MediaType::class);
     }
+
+    public function getGetUrlAttribute()
+    {
+        return url("$this->url");
+    }
 }

@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Frontend;
 use App\Http\Controllers\Controller;
 use App\Models\Post;
 use Illuminate\Http\Request;
+use Illuminate\Support\Collection;
 
 class HomePageController extends Controller
 {
@@ -15,11 +16,20 @@ class HomePageController extends Controller
      */
     public function index()
     {
-        $posts = Post::latest()->get()->take(10);
+        $posts = Post::latest()->get()->take(20);
+
+        // $images = new Collection();
+
+        // foreach ($posts as $post)
+        // {
+        //     $post_images = $post->images;
+        //     $images->put($post->id,$post_images);
+        // }
 
         return view('home',
         [
             'posts'=>$posts,
+            // 'images'=>$images
         ]);
     }
 

@@ -4,7 +4,7 @@ namespace Database\Seeders;
 
 use Illuminate\Database\Seeder;
 
-use App\Models\{Post,User};
+use App\Models\{Post,User,MediaType,MediaData};
 
 class DatabaseSeeder extends Seeder
 {
@@ -17,5 +17,8 @@ class DatabaseSeeder extends Seeder
     {
         User::factory(10)->create();
         Post::factory(90)->create();
+
+        MediaType::factory(3)->create();
+        MediaData::factory(20)->create();
     }
 }

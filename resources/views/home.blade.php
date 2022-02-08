@@ -30,12 +30,11 @@ Home
     <div class="card-container">
       <article class="card card--creation">
         <div class="card__header--md">
-          <button class="content-creation__button">Create Content</button>
+          <button onclick="show_post_form(this)" class="content-creation__button">Create Content</button>
         </div>
 
-        <div class="card__body">
-          <form method="post" id="" action="{{ route('posts.store')}}">
-            @csrf
+        <div id="post-form" class="card__body">
+          <form method="post" id="" action="{{ route('posts.store')}}" enctype="multipart/form-data">
 
             <div class="form__group">
               <label class="form__label" for="">Title</label>
@@ -51,18 +50,22 @@ Home
             <div class="form__group form__container">
               <label class="form__label form__button" for="upload">Add Image</label>
               <input id="upload" class="form__input" name="file" type="file"/>
+              
+              
             </div>
 
             <div class="form__group">
               <label class="form__label" for="iframe">Embedded Content</label>
-              <textarea class="form__text" cols="50" id="" name="iframe" rows="4"></textarea> 
+              <textarea class="form__text" cols="50" id="" name="iframe" rows="4"></textarea>
             </div>
 
             <div class="form__group">
+              @csrf
+                          
               <input class="form__button" name="" type="submit" value="Send"/>
             </div>
 
-          </form>
+            </form>
         </div>
       </article>
     </div>
@@ -82,7 +85,12 @@ Home
           <div class="card__title">{{ $post->title }}</div>
           <p class="card__content">
             {{ $post->body }}
-          </p>      
+          </p>
+          @isset($post->images)
+          @foreach($post->images as $image)
+          <img class="card__image" alt="" src="{{ $image->get_url }}"/>
+          @endforeach
+          @endisset
         </div>
 
         <div class="card__footer">
@@ -107,5 +115,19 @@ Home
 
 
 
+
+@endsection
+
+
+@section('script')
+
+function show_post_form(obj)
+{
+    obj.style.display = "none";
+
+    let form = document.querySelector('#post-form');
+
+    form.style.display = "flex";
+}
 
 @endsection

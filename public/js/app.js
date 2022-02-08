@@ -2060,7 +2060,11 @@ module.exports = {
   \*****************************/
 /***/ ((__unused_webpack_module, __unused_webpack_exports, __webpack_require__) => {
 
-__webpack_require__(/*! ./bootstrap */ "./resources/js/bootstrap.js");
+__webpack_require__(/*! ./bootstrap */ "./resources/js/bootstrap.js"); // Use a component framework
+// let error_alert = document.querySelector('#error');
+// error_alert.addEventListener('click',()=>{
+//     this.style.display = "none";
+// })
 
 /***/ }),
 

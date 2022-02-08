@@ -306,6 +306,11 @@ h1{
     font-size:var(--sm);
 }
 
+.card__image
+{
+    width:100%;
+}
+
 .card__footer{
     width:80%;
     margin-top:12px;
@@ -374,3 +379,8 @@ h1{
     align-items: flex-start;
     justify-content: flex-start;
 }
+
+#post-form{
+    display:none;
+}
+

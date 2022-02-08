@@ -4,9 +4,11 @@ namespace Tests\Feature\Htttp\Controllers\Backend;
 
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
+use Illuminate\Http\UploadedFile;
+use Illuminate\Support\Facades\Storage;
 use Tests\TestCase;
 
-use App\Models\{Post, User};
+use App\Models\{Post, User, MediaType};
 
 class PostControllerTest extends TestCase
 {
@@ -16,6 +18,13 @@ class PostControllerTest extends TestCase
      * @return void
      */
     use RefreshDatabase;
+
+    public function setUp():void
+    {
+        parent::setUp();
+
+        MediaType::factory(3)->create();
+    }
 
     // public function test_void_posts()
     // {
@@ -44,15 +53,24 @@ class PostControllerTest extends TestCase
 
     public function test_store_post()
     {
+        $this->withoutExceptionHandling();
+        
+        Storage::fake('local');
+        
         $user = User::factory()->create();
+
+        $file = UploadedFile::fake()->image('photo.png');
 
         $response=$this->actingAs($user,'web')->post('posts',[
             'title'=>"PHP",
+            'file'=>$file
         ]);
 
-        $response->assertStatus(201);
+        Storage::disk('local')->assertExists("images/{$file->hashName()}");
+        // $response->assertStatus(201);
 
         $this->assertDatabaseHas('posts',['title'=>'php']);
+        $this->assertDatabaseHas('media_data',['url'=>$file->hashName()]);
     }
 
     public function test_update_post()
