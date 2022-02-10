@@ -418,3 +418,10 @@ h1{
     color:var(--white);
 }
 
+.likes{
+    margin-left:4px;
+    font-size:var(--md);
+    font-weight:bold;
+    vertical-align:-5px;        
+}
+

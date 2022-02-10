@@ -417,3 +417,10 @@ h1{
     cursor:pointer;
     color:var(--white);
 }
+
+.likes{
+    margin-left:4px;
+    font-size:var(--md);
+    font-weight:bold;
+    vertical-align:-5px;        
+}

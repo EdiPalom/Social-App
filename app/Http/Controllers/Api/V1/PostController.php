@@ -29,7 +29,7 @@ class PostController extends Controller
     {
         // $posts = $this->post->latest()->get();
 
-        return new PostCollection($this->post->latest()->get());
+        return new PostCollection($this->post->latest()->get()->take(10));
 
         // return response()->json(compact('posts'),200);
 

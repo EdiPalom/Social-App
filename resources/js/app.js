@@ -1,5 +1,7 @@
 require('./bootstrap');
 
+import Post from './post';
+
 
 // Use a component framework
 
@@ -40,6 +42,7 @@ button_land.addEventListener('click',()=>{
 });
 
 close.addEventListener('click',()=>{
+    event.preventDefault();
     form.style.display = "none";
     create.style.display = "inline-block";
     image.style.display = "none";
@@ -49,3 +52,65 @@ close.addEventListener('click',()=>{
 });
 
 
+    
+    // async ()=>{
+    //     let formData = new FormData();
+
+    //     formData.append('name','android');
+
+    //     const response = await fetch('http://localhost:5000/social-app/public/api/tokens/create',{
+    //         method: 'post',
+            
+    //         body:formData
+    //     });
+    //     console.log(response);
+
+    //     const token = await response.json();
+    //     console.log(token);
+    // }
+
+function post_factory(data)
+{
+    data.forEach(post =>{
+         new Post().add_element(post);
+    });
+}
+
+async function get_posts(){
+    const response = await fetch('http://localhost:5000/social-app/public/api/posts',
+                                 {
+                                     headers:{
+                                         Accept:'application/json',
+                                         Authorization: 'Bearer '+document.querySelector("meta[name='access_token']").getAttribute('content')
+                                     }
+                                 });
+    // console.log(response);
+    const posts = await response.json();
+    console.log(posts);
+
+    post_factory(posts.data);
+}
+
+async function get_token(){
+    let formData = new FormData();
+
+    formData.append('name','android');
+
+    const response = await fetch('http://localhost:5000/social-app/public/tokens/create',{
+        method: 'post',
+        headers:{
+            'X-CSRF-TOKEN': document.querySelector("meta[name='csrf-token']").getAttribute('content')
+        },
+        body:formData
+    });
+
+    const token = await response.json();
+
+    document.querySelector("meta[name='access_token']").setAttribute('content',token['token']);
+
+    get_posts();
+}
+
+
+
+get_token();

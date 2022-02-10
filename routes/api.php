@@ -26,6 +26,23 @@ Route::apiResource('posts',Post::class)
     ->middleware('auth:sanctum')
     ->only(['index','show']);
 
+// Route::post('/tokens/create',function(Request $request){
+
+//     if(Auth::hasUser())
+//     {
+//         $token = $request->user()->createToken($request->name)->plainTextToken;
+//         // return response()->cookie('access_token',$token,10);
+//         return response()->json([
+//             'token' => $token,
+//             'message'=> 'success'
+//         ]);       
+//     }
+
+//     return response()->json([
+//        'message' => 'Unauthorized'
+//     ],401);
+// });
+
 Route::apiResource('comments',Comment::class)
     ->middleware('auth:sanctum')
     ->only('show');

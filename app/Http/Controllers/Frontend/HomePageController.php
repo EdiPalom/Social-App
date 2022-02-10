@@ -15,8 +15,8 @@ class HomePageController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function index()
-    {
-        $posts = Post::latest()->get()->take(20);
+    {   
+        $posts = Post::latest()->get()->take(50);
 
         // $images = new Collection();
 

@@ -1,5 +1,9 @@
 @extends('layouts.app')
 
+@section('head')
+<meta name="access_token" content="" />
+@endsection
+
 @section('title')
 Home
 @endsection
@@ -74,39 +78,46 @@ Home
     </div>
   </section>
 
-  <section class="posts">
-    @foreach($posts as $post)
-    <div class="card-container">
-      <article class="card">
-        <div class="card__header">
-          <img class="user-profile card__user-profile" alt="" src="{{ $post->user->profile }}"/>        
+  <section id="posts" class="posts">
+    <!-- @foreach($posts as $post) -->
+    <!-- <div class="card-container"> -->
+    <!--   <article class="card"> -->
+    <!--     <div class="card__header"> -->
+    <!--       <img class="user-profile card__user-profile" alt="" src="{{ $post->user->profile }}"/>         -->
 
-          <p class="card__username">{{ $post->user->username }}</p>      
-        </div>
+    <!--       <p class="card__username">{{ $post->user->username }}</p>       -->
+    <!--     </div> -->
 
-        <div class="card__body">
-          <div class="card__title">{{ $post->title }}</div>
-          <p class="card__content">
-            {{ $post->body }}
-          </p>
-          @isset($post->images)
-          @foreach($post->images as $image)
-          <img class="card__image" alt="" src="{{ $image->get_url }}"/>
-          @endforeach
-          @endisset
-        </div>
+    <!--     <div class="card__body"> -->
+    <!--       <div class="card__title">{{ $post->title }}</div> -->
+    <!--       <p class="card__content"> -->
+    <!--         {{ $post->body }} -->
+    <!--       </p> -->
+    <!--       @isset($post->images) -->
+    <!--       @foreach($post->images as $image) -->
+    <!--       <img class="card__image" alt="" src="{{ $image->get_url }}"/> -->
+    <!--       @endforeach -->
+    <!--       @endisset -->
 
-        <div class="card__footer">
-          <div class="card__actions">
-            <button class="icon button--message"></button>
-            <button class="icon button--pen"></button>
-            <button class="icon button--heart"></button>
-          </div>
-        </div>
-      </article>    
-    </div>
+    <!--     </div> -->
 
-    @endforeach  
+    <!--     <div class="card__footer"> -->
+    <!--       <div class="card__actions"> -->
+    <!--         <button class="icon button--message"></button> -->
+    <!--         <button class="icon button--pen"></button> -->
+
+    <!--         <div> -->
+    <!--           <button class="icon button--heart"></button> -->
+    <!--           <span class="likes"> -->
+    <!--             {{ $post->likes->count() }}               -->
+    <!--           </span>               -->
+    <!--         </div> -->
+    <!--       </div> -->
+    <!--     </div> -->
+    <!--   </article>     -->
+    <!-- </div> -->
+
+    <!-- @endforeach   -->
   </section>  
 </main>
 

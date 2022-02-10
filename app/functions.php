@@ -1,5 +1,7 @@
 <?php
 
+use Illuminate\Support\Facades\Auth;
+
 if(! function_exists('validate_email')){
     function validate_email($email)
     {
@@ -53,6 +55,13 @@ if(! function_exists('sanitize_iframe')){
     function sanitize_iframe($string)
     {
         return App\Helpers\Sanitize::iframe($string);
+    }
+}
+
+if(!function_exists('access_token')){
+    function access_token():string
+    {
+        return Auth::user()->createToken('jwstoken')->plainTextToken;
     }
 }
 

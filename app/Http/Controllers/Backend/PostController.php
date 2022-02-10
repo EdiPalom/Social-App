@@ -50,23 +50,25 @@ class PostController extends Controller
         // $cleaned_body => strip_tags($request->content);
         // $cleaned_iframe => strip_tags($request->iframe,'<iframe>');
 
-        $post = $this->post->create([
-            'user_id'=>auth()->user()->id,
-            'title'=>$request->title,
-            'body'=>$request->body,
-            'iframe'=>$request->iframe
-        ]);
-
-        if($request->file('file') and $request->file('file')->isValid())
-        {
-            // $url = $request->file('file')->store('images','public');
-            $url = $request->file('file')->store('images');
-
-            MediaData::create([
-                'post_id'=>$post->id,
-                'url'=>$url,
-                'media_type_id'=>'1'
+        if(!(is_null($request->title) and is_null($request->file('file')))){
+            $post = $this->post->create([
+                'user_id'=>auth()->user()->id,
+                'title'=>$request->title,
+                'body'=>$request->body,
+                'iframe'=>$request->iframe
             ]);
+
+            if($request->file('file') and $request->file('file')->isValid())
+            {
+                // $url = $request->file('file')->store('images','public');
+                $url = $request->file('file')->store('images');
+
+                MediaData::create([
+                    'post_id'=>$post->id,
+                    'url'=>$url,
+                    'media_type_id'=>'1'
+                ]);
+            }
         }
 
         // return response()->json($post,201);
