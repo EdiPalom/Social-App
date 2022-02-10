@@ -30,10 +30,11 @@ Home
     <div class="card-container">
       <article class="card card--creation">
         <div class="card__header--md">
-          <button onclick="show_post_form(this)" class="content-creation__button">Create Content</button>
+          <button id="create__button" onclick="show_post_form(this)" class="content-creation__button">Create Content</button>
         </div>
 
         <div id="post-form" class="card__body">
+          <span id="form-close" class="form-close">x</span>
           <form method="post" id="" action="{{ route('posts.store')}}" enctype="multipart/form-data">
 
             <div class="form__group">
@@ -47,21 +48,23 @@ Home
               </textarea>
             </div>
 
-            <div class="form__group form__container">
+            <div id="form--image" class="form__group form__container">
               <label class="form__label form__button" for="upload">Add Image</label>
-              <input id="upload" class="form__input" name="file" type="file"/>
-              
-              
+              <input id="upload" class="form__input" name="file" type="file"/>              
             </div>
 
-            <div class="form__group">
+            <div id="form--link" class="form__group">
               <label class="form__label" for="iframe">Embedded Content</label>
               <textarea class="form__text" cols="50" id="" name="iframe" rows="4"></textarea>
             </div>
 
+            <div class="form__icons">
+              <button id="button--land" class="icon button--land"></button>
+              <button id="button--link" class="icon button--link"></button>
+            </div>
+            
             <div class="form__group">
               @csrf
-                          
               <input class="form__button" name="" type="submit" value="Send"/>
             </div>
 
@@ -120,14 +123,5 @@ Home
 
 
 @section('script')
-
-function show_post_form(obj)
-{
-    obj.style.display = "none";
-
-    let form = document.querySelector('#post-form');
-
-    form.style.display = "flex";
-}
 
 @endsection

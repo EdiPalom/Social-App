@@ -2066,6 +2066,38 @@ __webpack_require__(/*! ./bootstrap */ "./resources/js/bootstrap.js"); // Use a 
 //     this.style.display = "none";
 // })
 
+
+var create = document.querySelector('#create__button');
+var form = document.querySelector('#post-form');
+var image = document.querySelector('#form--image');
+var link = document.querySelector('#form--link');
+var button_link = document.querySelector('#button--link');
+var button_land = document.querySelector('#button--land');
+var close = document.querySelector('#form-close');
+create.addEventListener('click', function () {
+  create.style.display = "none";
+  form.style.display = "flex";
+});
+button_link.addEventListener('click', function () {
+  event.preventDefault();
+  button_link.style.display = "none";
+  link.style.display = "flex";
+  link.style.flexDirection = "column";
+});
+button_land.addEventListener('click', function () {
+  event.preventDefault();
+  button_land.style.display = "none";
+  image.style.display = "flex";
+});
+close.addEventListener('click', function () {
+  form.style.display = "none";
+  create.style.display = "inline-block";
+  image.style.display = "none";
+  button_link.style.display = "inline-block";
+  link.style.display = "none";
+  button_land.style.display = "inline-block";
+});
+
 /***/ }),
 
 /***/ "./resources/js/bootstrap.js":
