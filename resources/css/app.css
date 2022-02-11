@@ -114,6 +114,11 @@ h1{
     border-radius:50%;
 }
 
+.user-profile--sm{
+    width:28px;
+    height:28px;
+}
+
 .main-nav__user-profile{
     vertical-align:-10px;    
 }
@@ -283,6 +288,11 @@ h1{
     margin-top:5px;
 }
 
+.card__username--sm
+{
+    font-size:var(--sm);
+}
+
 .card__header--md{
     width:80%;
     margin: 0 auto;
@@ -292,6 +302,11 @@ h1{
 {
     margin-right:8px;
     vertical-align:-24px;
+}
+
+.card__comment-profile
+{
+    vertical-align:-10px;
 }
 
 .card__title{
@@ -326,6 +341,12 @@ h1{
 {
     display:flex;
     justify-content:space-between;
+}
+
+.card__comments
+{
+    display:flex;
+    flex-direction:column;
 }
 
 .button--message

@@ -21,5 +21,6 @@ mix.js('resources/js/app.js', 'public/js')
     ]);
 
 mix.js('resources/js/post.js','public/js');
+mix.js('resources/js/comment.js','public/js');
 
 mix.postCss('resources/css/normalize.css','public/css');

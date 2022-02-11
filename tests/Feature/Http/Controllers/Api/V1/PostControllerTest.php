@@ -42,7 +42,7 @@ class PostControllerTest extends TestCase
     }
     
     public function test_show_posts(){
-        // $this->withoutExceptionHandling();
+        $this->withoutExceptionHandling();
 
         // $user = User::factory()
         //       ->has(Post::factory()->count(3))
@@ -82,9 +82,16 @@ class PostControllerTest extends TestCase
             'post_name',
             'content',
             'iframe',
+            'images'=>['*'=>['id','url','description','created_at','media_type_id','post_id','status','updated_at']],
+            'likes',
+            'comments',
             'author'=>['username','picture'],
         ])
-                 ->assertJson(['post_name'=>$this->post->title])
+                 ->assertJson(
+                     [
+                         'post_name'=>$this->post->title,
+                         'comments'=>0
+                     ])
                  ->assertStatus(200);   
     }
 

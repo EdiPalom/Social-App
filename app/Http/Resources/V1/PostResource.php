@@ -24,6 +24,7 @@ class PostResource extends JsonResource
             'images'=>$this->images,
             'likes'=>$this->likes->count(),
             'user_like'=> check_user_like($this->id),
+            'comments'=> $this->comments->count(),
             'author' =>[
                 'username'=>$this->user->username,
                 'picture'=>$this->user->profile
