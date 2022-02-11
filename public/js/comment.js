@@ -64,6 +64,7 @@ function Comment() {
     p.className = 'card__content';
     p.style.marginTop = "8px";
     p.innerText = content;
+    div.style.marginTop = "8px";
     div.style.paddingBottom = '4px';
     div.style.borderBottom = '1px solid #fff';
     div.appendChild(profile);

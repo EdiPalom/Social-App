@@ -2134,7 +2134,9 @@ close.addEventListener('click', function () {
 
 function post_factory(data) {
   data.forEach(function (post) {
-    new _post__WEBPACK_IMPORTED_MODULE_1__["default"]().add_element(post);
+    new _post__WEBPACK_IMPORTED_MODULE_1__["default"]({
+      comments: post.comments
+    }).add_element(post);
   });
 }
 
@@ -2288,6 +2290,7 @@ function Comment() {
     p.className = 'card__content';
     p.style.marginTop = "8px";
     p.innerText = content;
+    div.style.marginTop = "8px";
     div.style.paddingBottom = '4px';
     div.style.borderBottom = '1px solid #fff';
     div.appendChild(profile);
@@ -2316,7 +2319,24 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _comment__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./comment */ "./resources/js/comment.js");
 
 function Post() {
+  var _ref = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {},
+      comments = _ref.comments;
+
   var liked = false;
+  var comments_show = false;
+  var state = {
+    _comments: comments
+  };
+  var comments_card = document.createElement('div');
+  comments_card.className = 'card__comments card__body';
+
+  function comment_factory(comment) {
+    var dom_comment = new _comment__WEBPACK_IMPORTED_MODULE_0__["default"]({
+      username: comment.author.username,
+      picture: comment.author.picture
+    }).create_element(comment.content);
+    comments_card.appendChild(dom_comment);
+  }
 
   function highlight_button(button) {
     button.style.backgroundColor = "#ffb0b8";
@@ -2325,9 +2345,9 @@ function Post() {
   }
 
   function user_profile() {
-    var _ref = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {},
-        picture = _ref.picture,
-        username = _ref.username;
+    var _ref2 = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {},
+        picture = _ref2.picture,
+        username = _ref2.username;
 
     var profile = document.createElement('div');
     profile.innerHTML = "\n                     <img class = \"user-profile card__user-profile\" alt=\"\" src=\"".concat(picture, "\"/>\n                     <p class=\"card__username\"> ").concat(username, "</p>");
@@ -2394,16 +2414,15 @@ function Post() {
       highlight_button(like_button);
     }
 
-    var comments_card = document.createElement('div');
-    comments_card.className = 'card__comments card__body';
     var comments_button = document.createElement('button');
     comments_button.className = 'icon button--message';
     var comments_count = document.createElement('span');
     comments_count.className = 'likes';
-    comments_count.innerText = post.comments;
+    comments_count.innerText = state._comments;
 
-    if (post.comments > 0) {
-      comments_button.onclick = function () {
+    comments_button.onclick = function () {
+      if (state._comments > 0 && !comments_show) {
+        comments_show = true;
         fetch("http://localhost:5000/social-app/public/api/comments/post/".concat(post.id), {
           headers: {
             Accept: 'application/json',
@@ -2413,15 +2432,14 @@ function Post() {
           return response.json();
         }).then(function (comments) {
           comments.data.forEach(function (comment) {
-            var dom_comment = new _comment__WEBPACK_IMPORTED_MODULE_0__["default"]({
-              username: comment.author.username,
-              picture: comment.author.picture
-            }).create_element(comment.content);
-            comments_card.appendChild(dom_comment);
+            comment_factory(comment);
           });
         });
-      };
-    }
+      } else {
+        comments_card.innerHTML = '';
+        comments_show = false;
+      }
+    };
 
     var div_like = document.createElement('div');
     div_like.appendChild(like_button);
@@ -2429,7 +2447,50 @@ function Post() {
     var div_comment = document.createElement('div');
     div_comment.appendChild(comments_button);
     div_comment.appendChild(comments_count);
+    var create_comment_div = document.createElement('div');
+    create_comment_div.style.marginTop = '4px';
+    var comment_button = document.createElement('button');
+    comment_button.className = 'icon button--pen';
+
+    comment_button.onclick = function () {
+      var input = document.createElement('textarea');
+      var button = document.createElement('button');
+      button.innerText = 'Comment';
+
+      button.onclick = function () {
+        if (input.value != '') {
+          var formData = new FormData();
+          formData.append('content', input.value);
+          formData.append('post_id', post.id);
+          fetch('http://localhost:5000/social-app/public/comments', {
+            method: 'post',
+            headers: {
+              'X-CSRF-TOKEN': document.querySelector("meta[name='csrf-token']").getAttribute('content')
+            },
+            body: formData
+          }).then(function (response) {
+            return response.json();
+          }).then(function (comment) {
+            comment_factory(comment);
+            create_comment_div.innerHTML = '';
+            state._comments++;
+            comments_show = true;
+            var num = parseInt(comments_count.innerText);
+            num++;
+            comments_count.innerText = num;
+          });
+        }
+      };
+
+      input.className = 'form__text';
+      button.className = 'form__button';
+      button.style.marginTop = '4px';
+      create_comment_div.appendChild(input);
+      create_comment_div.appendChild(button);
+    };
+
     card_actions.appendChild(div_comment);
+    card_actions.appendChild(comment_button);
     card_actions.appendChild(div_like);
     card_footer.appendChild(card_actions);
     card_body.appendChild(card_title);
@@ -2438,6 +2499,7 @@ function Post() {
     card_article.appendChild(card_header);
     card_article.appendChild(card_body);
     card_article.appendChild(card_footer);
+    card_article.appendChild(create_comment_div);
     card_article.appendChild(comments_card);
     card_container.appendChild(card_article);
     post_section.appendChild(card_container);

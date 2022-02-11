@@ -1,8 +1,27 @@
 import Comment from './comment';
 
-export default function Post()
+export default function Post({comments}={})
 {
     var liked = false;
+    var comments_show = false;
+
+    let state = {
+        _comments:comments
+    }
+
+    const comments_card = document.createElement('div');
+    comments_card.className = 'card__comments card__body';
+
+
+    function comment_factory(comment)
+    {
+        let dom_comment = new Comment(
+            {username:comment.author.username,
+             picture:comment.author.picture})
+            .create_element(comment.content);
+        
+        comments_card.appendChild(dom_comment);
+    }
 
     function highlight_button(button)
     {
@@ -104,20 +123,19 @@ export default function Post()
         {
             highlight_button(like_button);
         }
-
-        const comments_card = document.createElement('div');
-        comments_card.className = 'card__comments card__body';
         
         const comments_button = document.createElement('button');
         comments_button.className = 'icon button--message';
 
         const comments_count = document.createElement('span');
         comments_count.className = 'likes';
-        comments_count.innerText = post.comments;
+        comments_count.innerText = state._comments;
 
-        if(post.comments > 0)
-        {
-            comments_button.onclick = ()=>{
+        comments_button.onclick = ()=>{
+            if((state._comments > 0) && (!comments_show))
+            {
+                comments_show = true;
+                
                 fetch(`http://localhost:5000/social-app/public/api/comments/post/${post.id}`,{
                     headers:{
                         Accept:'application/json',
@@ -127,16 +145,14 @@ export default function Post()
                     .then(response => response.json())
                     .then(comments =>{
                         comments.data.forEach(comment=>{
-
-                            let dom_comment = new Comment(
-                                {username:comment.author.username,
-                                 picture:comment.author.picture})
-                                .create_element(comment.content);
-                            
-                            comments_card.appendChild(dom_comment);
+                            comment_factory(comment);
                         });
                     });
-            }            
+            }else
+            {
+                comments_card.innerHTML = '';
+                comments_show = false;
+            }
         }
 
         const div_like = document.createElement('div');
@@ -147,7 +163,58 @@ export default function Post()
         div_comment.appendChild(comments_button);
         div_comment.appendChild(comments_count);
 
+        const create_comment_div = document.createElement('div');
+        create_comment_div.style.marginTop = '4px';
+
+        const comment_button = document.createElement('button');
+        comment_button.className = 'icon button--pen';
+
+        comment_button.onclick = ()=>{
+            let input = document.createElement('textarea');
+            let button = document.createElement('button');
+            button.innerText = 'Comment';
+
+
+            button.onclick = ()=>{
+                if(input.value != '')
+                {
+                    let formData = new FormData();
+                    formData.append('content',input.value);
+                    formData.append('post_id',post.id);
+
+                    fetch('http://localhost:5000/social-app/public/comments',{
+                        method:'post' ,
+                        headers:{
+                            'X-CSRF-TOKEN': document.querySelector("meta[name='csrf-token']").getAttribute('content')
+                        },
+                        body:formData
+                    })
+                        .then(response => response.json())
+                        .then(comment =>{
+                            comment_factory(comment);
+
+                            create_comment_div.innerHTML = '';
+                            
+                            state._comments++;
+                            comments_show = true;
+
+                            let num = parseInt(comments_count.innerText);
+                            num++;
+                            comments_count.innerText = num;
+                        });
+                }
+            }
+
+            input.className = 'form__text';
+            button.className = 'form__button';
+            button.style.marginTop = '4px';
+            
+            create_comment_div.appendChild(input);
+            create_comment_div.appendChild(button);
+        };
+
         card_actions.appendChild(div_comment);
+        card_actions.appendChild(comment_button);
         card_actions.appendChild(div_like);
         
         card_footer.appendChild(card_actions);
@@ -159,6 +226,7 @@ export default function Post()
         card_article.appendChild(card_header);
         card_article.appendChild(card_body);
         card_article.appendChild(card_footer);
+        card_article.appendChild(create_comment_div);
         card_article.appendChild(comments_card);
         
         card_container.appendChild(card_article);

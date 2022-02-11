@@ -6,6 +6,8 @@ use App\Http\Controllers\Controller;
 use App\Models\Comment;
 use Illuminate\Http\Request;
 
+use App\Http\Resources\V1\CommentResource;
+
 use App\Http\Requests\CommentRequest;
 
 class CommentController extends Controller
@@ -52,7 +54,7 @@ class CommentController extends Controller
             'post_id'=>$request->post_id // TODO: get by cookie
         ]);
         
-        return response()->json($comment,201);
+        return response()->json(new CommentResource($comment),201);
     }
 
     /**

@@ -72,7 +72,9 @@ close.addEventListener('click',()=>{
 function post_factory(data)
 {
     data.forEach(post =>{
-         new Post().add_element(post);
+        new Post({
+            comments:post.comments
+        }).add_element(post);
     });
 }
 
