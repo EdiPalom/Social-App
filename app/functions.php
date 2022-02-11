@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Auth;
+use App\Models\{Like,User};
 
 if(! function_exists('validate_email')){
     function validate_email($email)
@@ -62,6 +63,19 @@ if(!function_exists('access_token')){
     function access_token():string
     {
         return Auth::user()->createToken('jwstoken')->plainTextToken;
+    }
+}
+
+if(!function_exists('check_user_like')){
+    function check_user_like($post_id):bool
+    {
+        $user = User::find(Auth::user()->id);
+                
+        $like_count = $user->likes()
+                           ->where('post_id',$post_id)->get()->count();
+
+        return ($like_count > 0)?true:false;
+        // return $like_count;
     }
 }
 

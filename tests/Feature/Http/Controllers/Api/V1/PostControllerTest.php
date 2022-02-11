@@ -29,13 +29,16 @@ class PostControllerTest extends TestCase
         Post::factory(5)->create();
 
         $response = $this->actingAs($this->user,'sanctum')->json('GET','/api/posts');
+
         $response
             ->assertJsonStructure([
             'data'=>[
-                '*'=>['id','post_name','content','iframe']
+                '*'=>['id','post_name','content','iframe',
+                      'images'=>['*'=>['id','url','description','created_at','media_type_id','post_id','status','updated_at']],
+                      'likes',
+                      'author'=>['username','picture']],
             ]])
             ->assertStatus(200);
-
     }
     
     public function test_show_posts(){

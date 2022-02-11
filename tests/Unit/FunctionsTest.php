@@ -92,5 +92,6 @@ class FunctionsTest extends TestCase
         $result = validate_url("aoeu");
 
         $this->assertFalse($result);
-    } 
+    }
+
 }

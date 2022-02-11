@@ -21,6 +21,9 @@ class PostResource extends JsonResource
             'post_name'=>$this->title,
             'content'=>$this->body,
             'iframe'=>$this->iframe,
+            'images'=>$this->images,
+            'likes'=>$this->likes->count(),
+            'user_like'=> check_user_like($this->id),
             'author' =>[
                 'username'=>$this->user->username,
                 'picture'=>$this->user->profile
