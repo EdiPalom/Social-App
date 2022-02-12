@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Cookie;
+use Illuminate\Foundation\Auth\EmailVerificationRequest;
 
 /*
 |--------------------------------------------------------------------------
@@ -30,6 +31,30 @@ Route::get('/', [Home::class,'index'])
 
 Route::get('home', [Home::class,'index'])
     ->middleware('auth');
+
+Route::get('login',function(){
+    return view('auth.login');
+})->name('login');
+
+Route::get('register',function(){
+    return view('auth.register');
+})->name('register');
+
+// Route::get('/email/verify', function () {
+//     return view('auth.verify-email');
+// })->middleware('auth')->name('verification.notice');
+ 
+// Route::get('/email/verify/{id}/{hash}', function (EmailVerificationRequest $request) {
+//     $request->fulfill();
+ 
+//     return redirect('/home');
+// })->middleware(['auth', 'signed'])->name('verification.verify');
+
+// Route::post('/email/verification-notification', function (Request $request) {
+//     $request->user()->sendEmailVerificationNotification();
+ 
+//     return back()->with('message', 'Verification link sent!');
+// })->middleware(['auth', 'throttle:6,1'])->name('verification.send');
 
 Route::post('/tokens/create',function(Request $request){
 
@@ -66,3 +91,4 @@ Route::post('multimedia/image',[Image::class,'store'])
 Route::resource('likes',Like::class)
     ->middleware('auth')
     ->except(['index','show','edit','create','update']);
+

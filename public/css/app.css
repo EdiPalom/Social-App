@@ -199,7 +199,7 @@ h1{
     background-size:cover;
 }
 
-.form__button{
+.button{
     width:100%;
     height:40px;
     padding:8px;
@@ -210,10 +210,14 @@ h1{
 
     cursor:pointer;
 
+    border-radius:10px;
+}
+
+.form__button{
+
     background-color:#81C784;
     color:var(--white);
     border:solid 2px #A5D6A7;
-    border-radius:10px;
 }
 
 .form__button:hover{
@@ -444,5 +448,17 @@ h1{
     font-size:var(--md);
     font-weight:bold;
     vertical-align:-5px;        
+}
+
+.register
+{
+    width:100%;
+    display:flex;
+    justify-content:center;
+}
+
+.register__button{
+    width:60%;
+    text-decoration:none;
 }
 

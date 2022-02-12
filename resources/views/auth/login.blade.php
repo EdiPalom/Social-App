@@ -49,10 +49,13 @@ Login
       </div>
 
       <div class="form__group">
-        <input class="form__button" name="" type="submit" value="Send"/>
+        <input class="button form__button" name="" type="submit" value="Send"/>
       </div>
 
     </form>  
+  </section>
+  <section class="register">
+    <a class="button register__button content-creation__button" href="{{ route('register') }}">Register</a>
   </section>
 </main>
 
