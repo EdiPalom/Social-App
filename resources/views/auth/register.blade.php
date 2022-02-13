@@ -4,10 +4,14 @@
 
 <main class="main main--login">
   <section class="characters">
-    <img alt="rocket.png" src="{{ asset('img/rocket_small.png') }}" width="100" height="100">
+    <picture>
+      <source media="(min-width:930px)" srcset="{{ asset('img/rocket_md.png')}}">
+        
+      <img alt="rocket.png" src="{{ asset('img/rocket_small.png') }}" width="100" height="100">      
+    </picture>
   </section>
   
-  <section class="section__form">
+  <section class="section__form section-register">
     @foreach($errors->all() as $error)
     <div class="alert alert--error">
       {{ $error }}
@@ -18,7 +22,7 @@
       @csrf
       <div class="form__group">
         <label class="form__label" for="username">Username</label>
-        <input class="form__input" name="username" type="text" value="{{ old('name') }}"/>
+        <input class="form__input" name="username" type="text" value="{{ old('username') }}"/>
       </div>
 
       <div class="form__group">

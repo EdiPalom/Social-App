@@ -39,7 +39,7 @@ Home
 
         <div id="post-form" class="card__body">
           <span id="form-close" class="form-close">x</span>
-          <form method="post" id="" action="{{ route('posts.store')}}" enctype="multipart/form-data">
+          <form class="creation__form" method="post" id="" action="{{ route('posts.store')}}" enctype="multipart/form-data">
 
             <div class="form__group">
               <label class="form__label" for="">Title</label>
@@ -63,13 +63,13 @@ Home
             </div>
 
             <div class="form__icons">
-              <button id="button--land" class="icon button--land"></button>
-              <button id="button--link" class="icon button--link"></button>
+              <button id="button--land" class="icon icon-md button--land"></button>
+              <button id="button--link" class="icon icon-md button--link"></button>
             </div>
             
             <div class="form__group">
               @csrf
-              <input class="form__button" name="" type="submit" value="Send"/>
+              <input class="button form__button" name="" type="submit" value="Send"/>
             </div>
 
             </form>

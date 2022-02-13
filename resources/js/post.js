@@ -206,7 +206,7 @@ export default function Post({comments}={})
             }
 
             input.className = 'form__text';
-            button.className = 'form__button';
+            button.className = 'button form__button';
             button.style.marginTop = '4px';
             
             create_comment_div.appendChild(input);

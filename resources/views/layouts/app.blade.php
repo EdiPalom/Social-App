@@ -21,6 +21,13 @@
 
     <link href="{{ asset('css/normalize.css') }}" rel="stylesheet"/>
     <link href="{{ asset('css/app.css') }}" rel="stylesheet"/>
+
+    <link rel="stylesheet" href="{{ asset('css/mobile-l.css') }}" type="text/css" media="(min-width: 390px)" />
+    
+    <link rel="stylesheet" href="{{ asset('css/tablet.css') }}" type="text/css" media="(min-width: 523px)" />
+
+    <link rel="stylesheet" href="{{ asset('css/laptop.css') }}" type="text/css" media="(min-width: 930px)" />
+    
   </head>
   
   <body>
@@ -35,7 +42,7 @@
       @yield('footer')
       <section class="main-footer__section">
         <ul class="main-footer__list">
-          <li class="main-footer__item"><a href="#">Github</a></li>
+          <li class="main-footer__item"><a href="https://github.com/Edipalom">Github</a></li>
           <li class="main-footer__item"><a href="#">Linkedin</a></li>
         </ul>
       </section>

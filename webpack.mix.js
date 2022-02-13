@@ -24,3 +24,6 @@ mix.js('resources/js/post.js','public/js');
 mix.js('resources/js/comment.js','public/js');
 
 mix.postCss('resources/css/normalize.css','public/css');
+mix.postCss('resources/css/mobile-l.css','public/css');
+mix.postCss('resources/css/tablet.css','public/css');
+mix.postCss('resources/css/laptop.css','public/css');

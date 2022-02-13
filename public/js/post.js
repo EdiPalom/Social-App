@@ -283,7 +283,7 @@ function Post() {
       };
 
       input.className = 'form__text';
-      button.className = 'form__button';
+      button.className = 'button form__button';
       button.style.marginTop = '4px';
       create_comment_div.appendChild(input);
       create_comment_div.appendChild(button);

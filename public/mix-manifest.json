@@ -2,6 +2,9 @@
     "/js/app.js": "/js/app.js",
     "/js/post.js": "/js/post.js",
     "/js/comment.js": "/js/comment.js",
+    "/css/laptop.css": "/css/laptop.css",
+    "/css/tablet.css": "/css/tablet.css",
+    "/css/mobile-l.css": "/css/mobile-l.css",
     "/css/normalize.css": "/css/normalize.css",
     "/css/app.css": "/css/app.css"
 }

@@ -1,0 +1,32 @@
+.form
+{
+    width:60%;
+    max-width:500px;
+}
+
+.register{
+    width:100%;
+}
+
+.register__button{
+    width:60%;
+    max-width:500px;
+}
+
+.main--home{
+    width:100%;
+    max-width:650px;
+
+    margin:0 auto;
+}
+
+body
+{
+    background-image:url('../img/blue-back.jpg');    
+}
+
+.icon-md{
+    width:40px;
+    height:40px;
+}
+
