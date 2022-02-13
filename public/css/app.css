@@ -54,16 +54,17 @@ h1{
 .characters{
     display:flex;
     justify-content:center;
+    padding-top:16px;
 }
 
-
 .main .characters img {
-	border-radius: 50%;
-	border: solid 0.5rem #b7bde4;
-	outline: 0.5rem solid #9ba3d9;
-	box-shadow: 1rem 0.1rem 0 0.2rem #7884cb;
-	background-color: #cbcfeb;
-	margin: 10px;
+    position:absolute;
+/* 	border-radius: 50%; */
+/* 	border: solid 0.5rem #b7bde4; */
+/* 	outline: 0.5rem solid #9ba3d9; */
+/* 	box-shadow: 1rem 0.1rem 0 0.2rem #7884cb; */
+/* 	background-color: #cbcfeb; */
+/* 	margin: 10px; */
 }
 
 .main {
@@ -73,7 +74,15 @@ h1{
 }
 
 .main--login{
-	background-image: linear-gradient(to top, #1a9cdb, #1889c1, #1577a8, #13658f, #105477);    
+
+	background-image: linear-gradient(to top, #1a9cdb, #1889c1, #1577a8, #13658f, #105477);
+}
+
+.section__form{
+    position: relative;
+    z-index:5;
+    padding-top:100px;
+    padding-bottom:40px;
 }
 
 .main--home{
@@ -142,6 +151,11 @@ h1{
     font-size:var(--md);
     font-weight:bold;
     color:var(--white);
+}
+
+.form__label--remember{
+    color:#000;
+    font-weight:bold;
 }
 
 .form__input{
@@ -460,5 +474,40 @@ h1{
 .register__button{
     width:60%;
     text-decoration:none;
+}
+
+.main-footer{
+    position:relative;
+    display:flex;
+    align-items:center;
+    justify-content: space-evenly;
+    width:100%;
+    height:150px;
+    background-color:var(--white);
+}
+
+.main-footer__list{
+    font-size:var(--md);
+    font-weight:500;
+    line-weight:1.8rem;
+    list-style-type:none;
+}
+
+.main-footer__item a{
+    text-decoration: none;
+    font-weight:bold;
+    color:#232323;
+}
+
+.main-footer__item a:hover{
+    color:#1996d2;
+}
+
+.border{
+    position:absolute;
+    top:-24px;
+    width:100%;
+    height:24px;
+    background:transparent url('../img/border.svg') repeat-x;
 }
 

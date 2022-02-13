@@ -30,8 +30,19 @@
     
     @yield('content')
 
-    <footer>
+    <footer class="main-footer">
+      <div class="border"></div>
       @yield('footer')
+      <section class="main-footer__section">
+        <ul class="main-footer__list">
+          <li class="main-footer__item"><a href="#">Github</a></li>
+          <li class="main-footer__item"><a href="#">Linkedin</a></li>
+        </ul>
+      </section>
+
+      <section class="main-footer__section">
+        <p>2022 &copy;Edisson Palomares</p>
+      </section>
     </footer>
 
     <script type="text/javascript">

@@ -3,7 +3,11 @@
 @section('content')
 
 <main class="main main--login">
-  <section>
+  <section class="characters">
+    <img alt="rocket.png" src="{{ asset('img/rocket_small.png') }}" width="100" height="100">
+  </section>
+  
+  <section class="section__form">
     @foreach($errors->all() as $error)
     <div class="alert alert--error">
       {{ $error }}

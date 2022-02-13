@@ -79,4 +79,12 @@ if(!function_exists('check_user_like')){
     }
 }
 
+if(!function_exists('get_avatar')){
+    function get_avatar($email):string
+    {
+        $email = md5($email);
+        return "https://s.gravatar.com/avatar/$email";
+    }
+}
+
 
